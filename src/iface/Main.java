@@ -10,15 +10,8 @@ public class Main {
         do {
             System.out.println("--------------- IFACE ---------------");
             System.out.println("1 - CADASTRAR NOVO USUÁRIO");
-            System.out.println("2 - CRIAR / EDITAR PERFIL");
-            System.out.println("3 - ADICIONAR AMIGOS");
-            System.out.println("4 - ENVIAR MENSAGEM");
-            System.out.println("5 - CRIAR COMUNIDADE");
-            System.out.println("6 - PARTICIPAR DE UMA COMUNIDADE");
-            System.out.println("7 - BUSCAR");
-            System.out.println("8 - CRIAR UM POST NO FEED DE NOTÍCIAS");
-            System.out.println("9 - REMOVER CONTA");
-            System.out.println("0 - SAIR");
+            System.out.println("2 - FAZER LOGIN");
+            System.out.println("0 - FECHAR APP");
             System.out.println("-------------------------------------");
             System.out.print("Digite o número: ");
             key = input.nextInt(); 
@@ -27,7 +20,13 @@ public class Main {
                 case 1:
                     u.newUser();
                     break;
-            
+                case 2:
+                    u.login();
+
+                    break;
+                case 3:
+                    System.out.println("FECHANDO APLICATIVO...");
+                    break;
                 default:
                     break;
             }
