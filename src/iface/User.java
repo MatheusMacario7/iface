@@ -8,103 +8,97 @@ public class User {
     private String userName;
     private String login;
     private String pass;
-
+    
     Profile p = new Profile();
 
     Scanner input =  new Scanner(System.in);
+
     
-
-    public void newUser() {
-         
-        System.out.println("\n----- CADASTRO DE NOVO USUÁRIO -----");
-        System.out.print("E-mail: ");
-        setEmail(input.nextLine());
-        System.out.print("Senha: ");
-        setPassword(input.nextLine());
-        System.out.print("Nome de usuário: ");
-        setUserName(input.nextLine());
-        System.out.println("\nO Login é " + this.email);
-        System.out.println("A senha é " + this.password);
-        System.out.println("Nome de usuário é " + this.userName);
-         
-    }
-    
-
-    public void login() {
-        int flag = 0;
-        do {
-            flag = 0;
-            System.out.println("\n--------------- IFACE ---------------");
-            System.out.print("Login: ");
-            setLogin(input.nextLine());
-            System.out.print("Senha: ");
-            setPass(input.nextLine());
-
-            if (this.email.equals(getLogin()) && this.pass.equals(getPassword())) {
-                System.out.println("Login realizado com sucesso!");
-            } else{
-                System.out.println("Endereço de E-mail ou senha incorreto!");
-                flag = 1;  
-            }
-
-        } while (flag == 1);
-        menuLogin();
-
-    }
-    
-    public void menuLogin() {
-        int num;
-        System.out.println("--------------- IFACE ---------------");
-        System.out.println("Welcome, " + getUserName() + "!");
-        System.out.println("---------- MENU ----------");
-        System.out.println("1 - EDITAR PERFIL");
-        System.out.println("2 - ADICIONAR AMIGOS");
-        System.out.println("3 - ENVIAR MENSAGEM");
-        System.out.println("4 - CRIAR COMUNIDADE");
-        System.out.println("5 - PARTICIPAR DE UMA COMUNIDADE");
-        System.out.println("6 - BUSCAR");
-        System.out.println("7 - CRIAR UM POST NO FEED DE NOTÍCIAS");
-        System.out.println("8 - REMOVER CONTA");
-        System.out.println("0 - SAIR");
-        System.out.println("-------------------------------------");
-        System.out.print("Digite o número: ");
-        num = input.nextInt();
-
-        switch (num) {
-            case 1:
-                p.editProfile(getUserName());
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            case 4:
-
-                break;
-            case 5:
-            
-                break;
-            case 6:
-            
-                break;
-            case 7:
-            
-                break;
-            case 8:
-            
-                break;
-            case 0:
-            
-                break;
-        
-            default:
-                break;
+    public static void clear(){
+        try{
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e){
+            e.getStackTrace();
         }
-        input.close();
     }
 
+    public User() {
+    }
+    
+    public User(String email, String password, String userName) {
+        setEmail(email);
+        setPassword(password);
+        setUserName(userName);
+    }
+
+    void viewUserName(){
+        System.out.println(" " + this.userName);
+    }
+
+    public void editProfile(User u) throws InterruptedException{
+        int key = 0;
+        do {
+            clear();
+            System.out.print("Perfil de " + this.userName);
+            System.out.println(showProfile());
+            System.out.println("0 - VOLTAR");
+            System.out.println("---------------------------------");
+            System.out.print("==> Digite a opção que deseja editar: ");
+            key = input.nextInt();
+
+            switch (key) {
+                case 1:
+                    System.out.print("Digite seu primeiro nome: ");
+                    p.setFirstName(input.next());
+                    break;
+                case 2:
+                    System.out.print("Digite seu último nome: ");
+                    p.setLastName(input.next());
+                    break;    
+                case 3:
+                    System.out.print("Digite sua idade: ");
+                    p.setAge(input.next());                   
+                    break;
+                case 4:
+                    System.out.print("Digite seu gênero: ");
+                    p.setGenre(input.next());
+                    break;
+
+                case 5:
+                    System.out.print("Digite o estado de relacionamento: ");
+                    p.setRelationship(input.next());
+                    break;
+
+                case 6:
+                    System.out.print("Digite seu número de telefone: ");
+                    p.setCellPhone(input.next());
+                    break;
+
+                case 0:
+                    Main.menuLogin(u);
+                    return;
+                default:
+                    System.out.println("OPÇÃO INVÁLIDA! Por favor digite uma das opções acima.");
+                    Thread.sleep(3000);
+                    break;
+            }
+            
+            input.nextLine();
+
+        } while (key != 0);
+        
+        
+    }
+
+    public String showProfile() {
+        return  "\n---------------------------------" + 
+                "\n1 - Primeiro nome: " + p.getFirstName() +
+                "\n2 - Último nome: " + p.getLastName() + 
+                "\n3 - Idade: " + p.getAge() + 
+                "\n4 - Gênero: " + p.getGenre() +
+                "\n5 - Relacionamento: " + p.getRelationship() +
+                "\n6 - Telefone: " + p.getCellPhone();
+    }
 
     public String getEmail() {
         return email;
@@ -136,4 +130,5 @@ public class User {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
 }
