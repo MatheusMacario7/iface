@@ -8,7 +8,8 @@ public class User {
     private String userName;
     private String login;
     private String pass;
-    
+    //private Registers requestfriend;
+
     Profile p = new Profile();
 
     Scanner input =  new Scanner(System.in);
@@ -44,7 +45,11 @@ public class User {
             System.out.println("0 - VOLTAR");
             System.out.println("---------------------------------");
             System.out.print("==> Digite a opção que deseja editar: ");
-            key = input.nextInt();
+            key = Main.loadInput();
+
+            if (key == -1) {
+                editProfile(u);
+            }
 
             switch (key) {
                 case 1:

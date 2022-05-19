@@ -7,6 +7,26 @@ public class Main {
     static Profile p = new Profile();
 
     static User nUser = new User();
+
+    public static int loadInput() throws InterruptedException {
+        Scanner input =  new Scanner(System.in);
+        boolean correctInput = false;
+        int key = -1;
+        while (!correctInput) {
+            try {
+                key = Integer.parseInt(input.next());
+                
+                correctInput = true;
+                
+            } catch (Exception e) {
+                System.out.println("ENTRADA INVÁLIDA. Digite apenas uma das opções!");
+                Thread.sleep(2000);
+                return key;
+            }
+            
+        }
+        return key;
+    }
     
 
 
@@ -31,26 +51,40 @@ public class Main {
     System.out.println("0 - FECHAR APP");
     System.out.println("-------------------------------------");
     System.out.print("==> Digite uma opção: ");
-    key = input.nextInt();
-    input.nextLine();
-    
-    switch (key) { 
-        case 1:
-            newUserMenu();
-            break;
+    key = loadInput();
 
-        case 2:
-            accessMenu();
-            break;
-        case 0:
-            System.out.println("FECHANDO APLICATIVO...");
-            Thread.sleep(2000);
-            break;
-        default:
-            System.out.println("OPÇÃO INVÁLIDA! Por favor digite uma das opções acima.");
-            Thread.sleep(3000);
-            break;
-    }   
+    if (key == -1) {
+        homeMenu();
+    }
+    else{
+        switch (key) { 
+            case 1:
+                newUserMenu();
+                break;
+    
+            case 2:
+                accessMenu();
+                break;
+            case 0:
+                System.out.print("FECHANDO APLICATIVO");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(800);
+                break;
+            default:
+                System.out.println("OPÇÃO INVÁLIDA! Por favor digite uma das opções acima.");
+                Thread.sleep(3000);
+                homeMenu();
+                break;
+        }
+    }
+    
+    
+       
 
 }
     
@@ -88,7 +122,7 @@ public static void newUserMenu() throws InterruptedException{
             menuLogin(Registers.search(login));
         }else{  System.out.println("Usuário e/ou senha incorretos!");
                 Thread.sleep(2000);
-                accessMenu();
+                homeMenu();
             }
     }
 
@@ -102,7 +136,10 @@ public static void newUserMenu() throws InterruptedException{
         System.out.println("0 - VOLTAR");
         System.out.println("-------------------------------");
         System.out.print("==> Digite uma opção: ");
-        op = input.nextInt();
+        op = loadInput();
+        if (op == -1) {
+            friendMenu(u);
+        }
 
     switch (op) {
         case 1:
@@ -157,8 +194,11 @@ public static void menuLogin(User u) throws InterruptedException{
     System.out.println("0 - SAIR");
     System.out.println("-------------------------------------");
     System.out.print("==> Digite uma opção: ");
-    num = input.nextInt();
-    input.nextLine();
+    num = loadInput();
+
+    if (num == -1) {
+        menuLogin(u);
+    }
 
     switch (num) {
         case 1:
@@ -186,9 +226,21 @@ public static void menuLogin(User u) throws InterruptedException{
         
             break;
         case 0:
+            System.out.print("SAINDO");
+            Thread.sleep(500);
+            System.out.print(".");
+            Thread.sleep(500);
+            System.out.print(".");
+            Thread.sleep(500);
+            System.out.print(".");
+            Thread.sleep(800);
+            homeMenu();
             break;
     
         default:
+            System.out.println("OPÇÃO INVÁLIDA! Por favor digite uma das opções acima.");
+            Thread.sleep(3000);
+            menuLogin(u);
             break;
     }
 }
