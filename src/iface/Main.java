@@ -138,8 +138,7 @@ public static void menuLogin(User u) throws InterruptedException{
     System.out.println("3 - PÁGINA DE MENSAGENS");
     System.out.println("4 - PÁGINA DE COMUNIDADES");
     System.out.println("5 - FEED DE NOTÍCIAS");
-    System.out.println("6 - BUSCAR");
-    System.out.println("7 - REMOVER CONTA");
+    System.out.println("6 - REMOVER CONTA");
     System.out.println("0 - SAIR");
     System.out.println("-------------------------------------");
     System.out.print("==> Digite uma opção: ");
@@ -166,10 +165,31 @@ public static void menuLogin(User u) throws InterruptedException{
         
             break;
         case 6:
-        
-            break;
-        case 7:
-        
+            System.out.println("Tem certeza que deseja DELETAR sua conta?");
+            System.out.print("Digite S para sim e N para não: ");
+            String op = input.nextLine().toUpperCase();
+            char carac = op.charAt(0);
+            if (carac == 'S') {
+                Registers.userList.remove(u);
+                System.out.print("DELETANDO SUA CONTA");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(800);
+                homeMenu();
+            }
+            else if (carac == 'N') {
+                System.out.println("Conta não removida! Obrigado(a) por continuar no Iface!");
+                Thread.sleep(2000);
+                menuLogin(u);
+            }else{
+                System.out.println("Digite apenas S ou N");
+                Thread.sleep(2000);
+                menuLogin(u);
+            }
             break;
         case 0:
             System.out.print("SAINDO");
