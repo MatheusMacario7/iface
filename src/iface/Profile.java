@@ -8,6 +8,16 @@ public class Profile {
     private String relationship;
     private String cellPhone;
 
+
+    public Profile(){
+        this.firstName = "______";
+        this.lastName = "______";
+        this.age = "0";
+        this.genre = "______";
+        this.relationship = "______";
+        this.cellPhone = "(00)0 0000-0000";
+
+    }
    
     public String getFirstName() {
         return firstName;

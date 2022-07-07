@@ -82,14 +82,10 @@ public class Main {
                 break;
         }
     }
-    
-    
-       
+        
 
 }
     
-
-
 public static void newUserMenu() throws InterruptedException{
     clear();
     System.out.println("\n----- CADASTRO DE NOVO USUÁRIO -----");
@@ -126,55 +122,9 @@ public static void newUserMenu() throws InterruptedException{
             }
     }
 
-    public static void friendMenu(User u) throws InterruptedException{
-        clear();
-        int op;
-        System.out.println("       ZONA DE AMIZADE");
-        System.out.println("-------------------------------");
-        System.out.println("1 - Adicionar um amigo");
-        System.out.println("2 - Solicitação de amizade");
-        System.out.println("0 - VOLTAR");
-        System.out.println("-------------------------------");
-        System.out.print("==> Digite uma opção: ");
-        op = loadInput();
-        if (op == -1) {
-            friendMenu(u);
-        }
+    
 
-    switch (op) {
-        case 1:
-            clear();
-            Registers.usersRegister();
-            System.out.println("0 - VOLTAR");
-            System.out.println("------------------------------------------------------------");
-            System.out.print("==> Digite uma opção para enviar a solicitação de amizade: ");
-            int resp = input.nextInt();
-            if (resp != 0 && resp <= Registers.userList.size()) {
-                resp--;
-                User friend = Registers.userList.get(resp);
-                
-                System.out.println("Solicitação de amizade enviada para " + friend.getUserName()+ "!");
-                Thread.sleep(2000);
-            }else if (resp > Registers.userList.size()) {
-                System.out.println("Opção inválida!");
-                Thread.sleep(2000);
-            }
-            friendMenu(u);
 
-            break;
-        case 2:
-            break;
-
-        case 0:
-            menuLogin(u);
-            break;
-
-        default:
-
-            break;
-    }
-
-}
 
 public static void menuLogin(User u) throws InterruptedException{
     int num;
@@ -184,13 +134,12 @@ public static void menuLogin(User u) throws InterruptedException{
     System.out.println("Welcome, " + u.getUserName() + "!");
     System.out.println("---------------- MENU ----------------");
     System.out.println("1 - EDITAR PERFIL");
-    System.out.println("2 - ADICIONAR AMIGOS");
-    System.out.println("3 - ENVIAR MENSAGEM");
-    System.out.println("4 - CRIAR COMUNIDADE");
-    System.out.println("5 - PARTICIPAR DE UMA COMUNIDADE");
+    System.out.println("2 - PÁGINA DE AMIGOS");
+    System.out.println("3 - PÁGINA DE MENSAGENS");
+    System.out.println("4 - PÁGINA DE COMUNIDADES");
+    System.out.println("5 - FEED DE NOTÍCIAS");
     System.out.println("6 - BUSCAR");
-    System.out.println("7 - CRIAR UM POST NO FEED DE NOTÍCIAS");
-    System.out.println("8 - REMOVER CONTA");
+    System.out.println("7 - REMOVER CONTA");
     System.out.println("0 - SAIR");
     System.out.println("-------------------------------------");
     System.out.print("==> Digite uma opção: ");
@@ -205,10 +154,10 @@ public static void menuLogin(User u) throws InterruptedException{
             u.editProfile(u);
             break;
         case 2:
-            friendMenu(u);
+            u.friendMenu(u);
             break;
         case 3:
-            
+            u.menuMessage(u);
             break;
         case 4:
 
@@ -220,9 +169,6 @@ public static void menuLogin(User u) throws InterruptedException{
         
             break;
         case 7:
-        
-            break;
-        case 8:
         
             break;
         case 0:

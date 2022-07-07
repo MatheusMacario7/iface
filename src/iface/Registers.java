@@ -5,15 +5,16 @@ import java.util.ArrayList;
 public class Registers {
 
     static ArrayList<User> userList = new ArrayList<>();
-    
+    //static ArrayList<Friends> friendshipRequests = new ArrayList<>();
+    //static ArrayList<String> myFriends = new ArrayList<>();
     
     static void insertUser(User newUser){
         userList.add(newUser); 
     }
     
     static void usersRegister(){
-        System.out.println("Usuários cadastrados");
-        System.out.println("-----------------------");
+        System.out.println("   USUÁRIOS CADASTRADOS  ");
+        System.out.println("-------------------------");
         int i = 1;
         for (User u : userList) {
             System.out.print(i++ + " -");
